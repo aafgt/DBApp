@@ -56,11 +56,9 @@ public class Table implements Serializable{
 		}
 	}
 	
-	///////////////////////////////
 //	public void addPage(Page p) {
 //		this.tablePages.add(p);
 //	}
-	///////////////////////////////
 	
 	public static boolean checkTableName(String tableName) {
 		String data = readData();

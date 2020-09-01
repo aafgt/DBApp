@@ -32,15 +32,3 @@ public class DBAppPolygon extends Polygon implements Comparable{
 	
 }
 
-
-//	one issue that arises from using java.awt.Polygon is that it does not implement 
-//	the comparable interface, which will hinder your effort to sort a column of type Polygon.
-//	To solve this problem, define your own class that will internally retrieve the points from 
-//	the passed Polygon. In that class, you can implement the interface comparable
-//	and consequently, you will need to add the method compareTo. To compare polygons, you can use 
-//	the bounding box to get the enclosing rectangle and use the area of the rectangle, 
-//	as follows: Dimension dim = poly1.getBounds( ).getSize( ); nThisArea = dim.width * dim.height;
-//	
-//	When calling the update method, if the clustering key is a polygon, 
-//	the second parameter will pass it as: "(10,20),(30,30),(40,40),(50,60)" 
-//	You can use Java's StringTokenizer to process such a string.

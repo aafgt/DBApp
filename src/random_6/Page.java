@@ -118,44 +118,6 @@ public class Page implements Serializable{
 	    });
 	}
 	
-//	public void sortPage(final String clstrKey) {
-//	    Collections.sort(this.page, new Comparator<Tuple>() {
-//	        public int compare(Tuple o1, Tuple o2) {
-//	        	if(o1.htblColNameValue == null || o2.htblColNameValue == null) {
-//		        	return -1;
-//	        	}else {
-//	        		Object o = o1.htblColNameValue.get(clstrKey);
-//	        		if(o instanceof Integer) {
-//		        		Integer o1clstrKey = (Integer)o1.htblColNameValue.get(clstrKey);
-//			        	Integer o2clstrKey = (Integer)o2.htblColNameValue.get(clstrKey);
-//			        	return o1clstrKey.compareTo(o2clstrKey);
-//		        	}else if(o instanceof String) {
-//		        		String o1clstrKey = (String)o1.htblColNameValue.get(clstrKey);
-//		        		String o2clstrKey = (String)o2.htblColNameValue.get(clstrKey);
-//		        		return o1clstrKey.compareTo(o2clstrKey);
-//		        	}else if(o instanceof Double) {
-//		        		Double o1clstrKey = (Double)o1.htblColNameValue.get(clstrKey);
-//		        		Double o2clstrKey = (Double)o2.htblColNameValue.get(clstrKey);
-//		        		return o1clstrKey.compareTo(o2clstrKey);
-//		        	}else if(o instanceof Boolean) {
-//		        		Boolean o1clstrKey = (Boolean)o1.htblColNameValue.get(clstrKey);
-//		        		Boolean o2clstrKey = (Boolean)o2.htblColNameValue.get(clstrKey);
-//		        		return o1clstrKey.compareTo(o2clstrKey);
-//		        	}else if(o instanceof Date) {
-//		        		Boolean o1clstrKey = (Boolean)o1.htblColNameValue.get(clstrKey);
-//		        		Boolean o2clstrKey = (Boolean)o2.htblColNameValue.get(clstrKey);
-//		        		return o1clstrKey.compareTo(o2clstrKey);
-//		        	}/*else if(o instanceof Polygon) {
-//		        		Polygon o1clstrKey = (Polygon)o1.htblColNameValue.get(clstrKey);
-//		        		Polygon o2clstrKey = (Polygon)o2.htblColNameValue.get(clstrKey);
-//		        		return o1clstrKey.compareTo(o2clstrKey);
-//		        	}*/
-//		        	return -1;
-//	        	}
-//	        	
-//	        }           
-//	    });
-//	}
 	
 	public static int getN() {
 		try {

@@ -46,7 +46,7 @@ public class DBApp {
 			
 			//Vector<String> v = getSerializedFiles();
 			//deserializeAll(v);
-			//read n in init() from properties file
+
 	//		int n = 10;
 	//		try {
 	//			FileWriter fw = new FileWriter("metadata.csv");
@@ -69,51 +69,8 @@ public class DBApp {
 		//Page p = new Page(e);
 		//serialize(p);
 	}
-	
-	//	public static void insertTuplesInTree(BPlusTree t, Vector<Page> pages, String colName) {
-	//		for(int i=0; i < pages.size(); i++) {
-	//			Page p = pages.get(i);
-	//			for(int j=0; j < p.page.size(); j++) {
-	//				Tuple tup = p.page.get(j);
-	//				Object o = tup.htblColNameValue.get(colName);
-	//				if(o instanceof Integer) {
-	//					t.insert((Integer)o, p.fileName);
-	//				}else if(o instanceof String) {
-	//					t.insert(o+"", p.fileName);
-	//				}else if(o instanceof Double) {
-	//					t.insert((Double)o, p.fileName);
-	//				}else if(o instanceof Boolean) {
-	//					t.insert((Boolean)o, p.fileName);
-	//				}else if(o instanceof Date) {
-	//					t.insert((Date)o, p.fileName);
-	//				}
-	//				
-	//			}
-	//		}
-	//	}
-		
-	//	public static boolean isIndexed(String strTableName, String strColName) {
-	//		String data = readData();
-	//		StringTokenizer t1 = new StringTokenizer(data,"\n");
-	//		while(t1.hasMoreTokens()) {
-	//			String current = t1.nextToken();
-	//			StringTokenizer t2 = new StringTokenizer(current,",");
-	//			String tableName = t2.nextToken();
-	//			String colName = removeSpaceInFront(t2.nextToken());
-	//			String colType = removeSpaceInFront(t2.nextToken());
-	//			String clusKey = removeSpaceInFront(t2.nextToken());
-	//			String indexed = removeSpaceInFront(t2.nextToken());
-	//			if(tableName.equals(strTableName) && colName.equals(strColName)) {
-	//				if(indexed.equals("true")) {
-	//					return true;
-	//				}
-	//			}
-	//		}
-	//		return false;
-	//	}
 		
 		public void createBTreeIndex(String strTableName, String strColName) throws DBAppException {
-			//check if col is already indexed;	DONE
 			if(!updateMetaDataIndexed(strTableName, strColName)) {
 				throw new DBAppException("Column already indexed or does not exist in table or table does not exist.");
 			}else {
@@ -136,48 +93,6 @@ public class DBApp {
 				}
 			}
 		}
-
-	//	public static void insertTuplesInTree(BPlusTree t, Vector<Page> pages, String colName) {
-		//		for(int i=0; i < pages.size(); i++) {
-		//			Page p = pages.get(i);
-		//			for(int j=0; j < p.page.size(); j++) {
-		//				Tuple tup = p.page.get(j);
-		//				Object o = tup.htblColNameValue.get(colName);
-		//				if(o instanceof Integer) {
-		//					t.insert((Integer)o, p.fileName);
-		//				}else if(o instanceof String) {
-		//					t.insert(o+"", p.fileName);
-		//				}else if(o instanceof Double) {
-		//					t.insert((Double)o, p.fileName);
-		//				}else if(o instanceof Boolean) {
-		//					t.insert((Boolean)o, p.fileName);
-		//				}else if(o instanceof Date) {
-		//					t.insert((Date)o, p.fileName);
-		//				}
-		//				
-		//			}
-		//		}
-		//	}
-			
-		//	public static boolean isIndexed(String strTableName, String strColName) {
-		//		String data = readData();
-		//		StringTokenizer t1 = new StringTokenizer(data,"\n");
-		//		while(t1.hasMoreTokens()) {
-		//			String current = t1.nextToken();
-		//			StringTokenizer t2 = new StringTokenizer(current,",");
-		//			String tableName = t2.nextToken();
-		//			String colName = removeSpaceInFront(t2.nextToken());
-		//			String colType = removeSpaceInFront(t2.nextToken());
-		//			String clusKey = removeSpaceInFront(t2.nextToken());
-		//			String indexed = removeSpaceInFront(t2.nextToken());
-		//			if(tableName.equals(strTableName) && colName.equals(strColName)) {
-		//				if(indexed.equals("true")) {
-		//					return true;
-		//				}
-		//			}
-		//		}
-		//		return false;
-		//	}
 			
 			public void createRTreeIndex(String strTableName, String strColName) throws DBAppException {
 				if(!updateMetaDataIndexed(strTableName, strColName)) {
@@ -189,7 +104,7 @@ public class DBApp {
 					//BPlusTree t = new BPlusTree(strTableName,strColName);
 					try {
 						RTree tree = new RTree(t,strTableName,strColName);
-						//need to handle duplicates
+
 						insertTuplesInRTree(tree,tablePages,strColName);
 						Rindex.add(tree);
 						//System.out.println(t);
@@ -204,49 +119,6 @@ public class DBApp {
 			}
 
 	
-	
-//	public static void insertTuplesInTree(BPlusTree t, Vector<Page> pages, String colName) {
-//		for(int i=0; i < pages.size(); i++) {
-//			Page p = pages.get(i);
-//			for(int j=0; j < p.page.size(); j++) {
-//				Tuple tup = p.page.get(j);
-//				Object o = tup.htblColNameValue.get(colName);
-//				if(o instanceof Integer) {
-//					t.insert((Integer)o, p.fileName);
-//				}else if(o instanceof String) {
-//					t.insert(o+"", p.fileName);
-//				}else if(o instanceof Double) {
-//					t.insert((Double)o, p.fileName);
-//				}else if(o instanceof Boolean) {
-//					t.insert((Boolean)o, p.fileName);
-//				}else if(o instanceof Date) {
-//					t.insert((Date)o, p.fileName);
-//				}
-//				
-//			}
-//		}
-//	}
-	
-//	public static boolean isIndexed(String strTableName, String strColName) {
-//		String data = readData();
-//		StringTokenizer t1 = new StringTokenizer(data,"\n");
-//		while(t1.hasMoreTokens()) {
-//			String current = t1.nextToken();
-//			StringTokenizer t2 = new StringTokenizer(current,",");
-//			String tableName = t2.nextToken();
-//			String colName = removeSpaceInFront(t2.nextToken());
-//			String colType = removeSpaceInFront(t2.nextToken());
-//			String clusKey = removeSpaceInFront(t2.nextToken());
-//			String indexed = removeSpaceInFront(t2.nextToken());
-//			if(tableName.equals(strTableName) && colName.equals(strColName)) {
-//				if(indexed.equals("true")) {
-//					return true;
-//				}
-//			}
-//		}
-//		return false;
-//	}
-	
 	public void insertIntoTable(String strTableName, Hashtable<String,Object> htblColNameValue) throws DBAppException  {
 		//try {
 			if(!checkDataType(strTableName, htblColNameValue)) {
@@ -254,25 +126,17 @@ public class DBApp {
 				//System.out.println("Invalid data types.");
 			}else {
 				if(false/*isTableClusteringKeyIndexed(strTableName)*/) {
-					//TODO if clstrKey is indexed USE INDEX
 					String tableClstrKey = getTableClusteringKey(strTableName);
 					Object currentTupleClstKeyValue = htblColNameValue.get(tableClstrKey);
 					Vector<BPTree> tableIndex = getTableTrees(strTableName);
 					for(int i=0; i < tableIndex.size(); i++) {
 						BPTree tree = tableIndex.get(i);
 						if(tree.colName.equals(tableClstrKey)) {
-							//get max value < than currentTupleCLstKeyValue
-							//	HOW?? bruteforce??
-							Ref r = tree.search(currentTupleClstKeyValue+"");/////////////XstringX
+							Ref r = tree.search(currentTupleClstKeyValue+"");
 							if(!(r == null)) {
 								String page = r.getPage();
 								deserialize(page);
 								Page thePage = pages.get(0);
-								//cases:
-								//1- there is space in page, insert and sort
-								//2- page is full, go to next page and check if there is
-								//	 	space, insert and sort, else if all pages are full
-								//		create a new page
 								
 							}
 						}
@@ -280,11 +144,9 @@ public class DBApp {
 				}else {
 					deserializeAll();
 					//deserializeAllForTree();
-					//find table name findTable(String strTableName)
 					Date date = new Date();
 					htblColNameValue.put("TouchDate", date);
 					Tuple e = new Tuple(strTableName, htblColNameValue);
-					//check where to serialize the tuple, in which table
 					//serialize(e);
 					
 					Vector<Page> tablePages = getTablePages(strTableName);
@@ -292,16 +154,16 @@ public class DBApp {
 					boolean flag = true;
 					boolean done = false;
 					
-					if(!pageFound(strTableName) || areAllPagesFull(tablePages)) {					//or page full in one condition
+					if(!pageFound(strTableName) || areAllPagesFull(tablePages)) {			
 						Page p = new Page(strTableName);
-						//Nfile++;//////////////
+						//Nfile++;
 						p.addTuple(e);
-						//p.sortPage(getTableClusteringKey(strTableName));///////////////
+						//p.sortPage(getTableClusteringKey(strTableName));
 						//sortMultiplePages(strTableName);
 						pages.add(p);
 						sortMultiplePages(strTableName);
-						serializeAll();//////////////////////
-						deleteAllPagesFromMem();//////////////////////////////
+						serializeAll();
+						deleteAllPagesFromMem();
 					}else {
 						for(int i=0; i < tablePages.size(); i++) {
 							if(!done) {
@@ -312,26 +174,26 @@ public class DBApp {
 										if(current.htblColNameValue == null) {
 											current.htblColNameValue = e.htblColNameValue;
 											current.strTableName = e.strTableName;
-											//p.sortPage(getTableClusteringKey(strTableName));///////////////
+											//p.sortPage(getTableClusteringKey(strTableName));
 											sortMultiplePages(strTableName);
 											flag = false;
 											done = true;
-											serializeAll();//////////////////////
-											deleteAllPagesFromMem();///////////////////////////
+											serializeAll();
+											deleteAllPagesFromMem();
 											break;
 										}
 									}
 									if(flag) {
 										p.addTuple(e);
-										//p.sortPage(getTableClusteringKey(strTableName));///////////////
+										//p.sortPage(getTableClusteringKey(strTableName));
 										sortMultiplePages(strTableName);
 										done = true;
 										
 										//if(p.isPageFull()) {
 										//	serialize(p);
 										//}
-										serializeAll();/////////////////////////
-										deleteAllPagesFromMem();////////////////////////////
+										serializeAll();
+										deleteAllPagesFromMem();
 										break;
 									}
 								}
@@ -359,7 +221,7 @@ public class DBApp {
 				for(int i=0; i < tableIndex.size(); i++) {
 					BPTree tree = tableIndex.get(i);
 					if(tree.colName.equals(tableClstrKey)) {
-						Ref r = tree.search(strClusteringKey);/////////////XstringX
+						Ref r = tree.search(strClusteringKey);
 						if(!(r == null)) {
 							String page = r.getPage();
 							deserialize(page);
@@ -453,14 +315,14 @@ public class DBApp {
 										Date date = new Date();
 										t.htblColNameValue.replace("TouchDate", date);
 										
-										//p.sortPage(tableClstrKey);///////////////
+										//p.sortPage(tableClstrKey);
 										sortMultiplePages(strTableName);
 										
 										//if(p.isPageFull()) {
 										//	updateSerialize(p, p.fileName);
 										//}
-										serializeAll();//////////////////////
-										deleteAllPagesFromMem();///////////////////////////
+										serializeAll();
+										deleteAllPagesFromMem();
 									}
 								}
 								
@@ -491,7 +353,6 @@ public class DBApp {
 				
 				if(!indexedColNames.isEmpty() && goToIndexDel(col,indexedColNames)) {
 					
-					//get index if any of the htblColNameValue....
 					
 					Vector<BPTree> tableIndex = getTableTrees(strTableName);
 					for(int i=0; i < tableIndex.size(); i++) {
@@ -506,7 +367,7 @@ public class DBApp {
 									for(int j=0; j < thePage.page.size(); j++) {
 										Tuple t = thePage.page.get(j);
 										Vector<String> values = new Vector<String>();
-										//////////////////////////////////////////////////
+										
 										for(int k=0; k < TheconditionsKey.size(); k++) {
 											String key = TheconditionsKey.get(k);
 											if(t.checkIfExists()) {
@@ -514,18 +375,18 @@ public class DBApp {
 												values.add(newValue);
 											}
 										}
-										//////////////////////////////////////////////////
+										
 										if(!values.isEmpty()) {
 											if(equalValues(TheconditionsValue, values)) {
-												//del
+												
 												//t = null
 												
 												tree.delete(t.htblColNameValue.get(col)+"");
 												
 												t.htblColNameValue = null;
 												aTupleWasDeleted = true;
-												//p.sortPage(getTableClusteringKey(strTableName));///////////////
-												//
+												//p.sortPage(getTableClusteringKey(strTableName));
+												
 												updateSerialize(thePage, thePage.fileName);
 												updateSerialize(tree, tree.fileName);
 											}
@@ -535,7 +396,7 @@ public class DBApp {
 								if(checkEmptyPage(thePage)) {
 									thePage.page = null;
 									//p = null;
-									pages.remove(thePage);///////////////////////
+									pages.remove(thePage);
 									//delete the empty page file
 									deleteFile(thePage.fileName);
 								}
@@ -556,7 +417,7 @@ public class DBApp {
 							for(int j=0; j < p.page.size(); j++) {
 								Tuple t = p.page.get(j);
 								Vector<String> values = new Vector<String>();
-								//////////////////////////////////////////////////
+								
 								for(int k=0; k < conditionsKey.size(); k++) {
 									String key = conditionsKey.get(k);
 									if(t.checkIfExists()) {
@@ -564,10 +425,10 @@ public class DBApp {
 										values.add(newValue);
 									}
 								}
-								//////////////////////////////////////////////////
+								
 								if(!values.isEmpty()) {
 									if(equalValues(conditionsValue, values)) {
-										//del
+									
 										//t = null
 										
 										Vector<BPTree> tableIndex = getTableTrees(strTableName);
@@ -576,7 +437,7 @@ public class DBApp {
 										
 										t.htblColNameValue = null;
 										aTupleWasDeleted = true;
-										//p.sortPage(getTableClusteringKey(strTableName));///////////////
+										//p.sortPage(getTableClusteringKey(strTableName));
 										
 										updateSerialize(p, p.fileName);
 										updateSerialize(tree, tree.fileName);
@@ -587,12 +448,12 @@ public class DBApp {
 						if(checkEmptyPage(p)) {
 							p.page = null;
 							//p = null;
-							pages.remove(p);///////////////////////
+							pages.remove(p);
 							//delete the empty page file
 							deleteFile(p.fileName);
 						}
 					}
-					deleteAllPagesFromMem();/////////////////////////
+					deleteAllPagesFromMem();
 					deleteAllIndexFromMem();
 				}
 				
@@ -609,7 +470,6 @@ public class DBApp {
 	public Iterator selectFromTable(SQLTerm[] arrSQLTerms, String[] strarrOperators) throws DBAppException {
 		//deserializeAll();
 		//deserializeAllForTree();
-		//checkStatement,checkForSelection
 		//try {
 			if(!checkForSelection(arrSQLTerms) || !checkStatement(arrSQLTerms, strarrOperators)) {
 				throw new DBAppException("Invalid Statement or table is empty or invalid data types.");
@@ -623,7 +483,7 @@ public class DBApp {
 					for(int i=0; i < tableIndex.size(); i++) {
 						BPTree tree = tableIndex.get(i);
 						if(tree.colName.equals(arrSQLTerms[0]._strColumnName)) {
-							//TODO need to loop on sqlterms to search or WHAT!!??
+
 							Ref r = tree.search(arrSQLTerms[0]._objValue+"");
 							if(!(r == null)) {
 								String page = r.getPage();
@@ -776,7 +636,7 @@ public class DBApp {
 	}
 
 	public static Polygon makePolygon(String p) {
-		//"(10,20),(30,30),(40,40),(50,60)" in update	DONE
+		//"(10,20),(30,30),(40,40),(50,60)"
 		boolean flag = true;
 		Vector<Integer> xx = new Vector<Integer>();
 		Vector<Integer> yy = new Vector<Integer>();
@@ -870,32 +730,6 @@ public class DBApp {
 		return result;
 	}
 	
-//	public static boolean checkForSelection(SQLTerm[] arrSQLTerms) {
-//		for(int i=0; i < arrSQLTerms.length; i++) {
-//			String tableName = arrSQLTerms[i]._strTableName;
-//			String colName = arrSQLTerms[i]._strColumnName;
-//			String op = arrSQLTerms[i]._strOperator;
-//			
-//			Vector<Page> thePages;
-//			if(checkTableExists(tableName)) {
-//				thePages = getTablePages(tableName);
-//			}else {
-//				thePages = null;
-//			}
-//			
-//			if(thePages == null) {
-//				return false;
-//			}else {
-//				if(checkColExists(colName, thePages) && checkOp(op)) {
-//					continue;
-//				}else {
-//					return false;
-//				}
-//			}
-//			
-//		}
-//		return true;
-//	}
 	
 	public static boolean checkForSelection(SQLTerm[] arrSQLTerms) {
 		for(int i=0; i < arrSQLTerms.length; i++) {
@@ -1211,7 +1045,6 @@ public class DBApp {
 	         //BPlusTree p = (BPlusTree)t;
 	         BPTree p = (BPTree)t;
 	         p.fileName = "index" + Tfile + ".class";
-	         // keep track,index of which table and on what col	DONE
 	         
 	         out.writeObject(t);
 	         out.close();
@@ -1234,7 +1067,6 @@ public class DBApp {
 	         //BPlusTree p = (BPlusTree)t;
 	         RTree p = (RTree)t;
 	         p.fileName = "index" + Tfile + ".class";
-	         // keep track,index of which table and on what col	DONE
 	         
 	         out.writeObject(t);
 	         out.close();
@@ -1279,7 +1111,6 @@ public class DBApp {
 	}
 	
 	public static Vector<String> getSerializedFilesForTree() {
-		//File folder = new File("C:\\Users\\amirw\\eclipse-workspace\\DBApp\\data");
 		//File folder = new File("\\data");
 		File folder2 = new File("data");
 		String ss = folder2.getAbsolutePath();
@@ -1313,23 +1144,14 @@ public class DBApp {
 	       BPTree p = (BPTree) in.readObject();
 	       in.close();
 	       fileIn.close();
-	       //return p;
 	       
 	       index.add(p);
-	       //System.out.println("deserialized.");
-	       //p.printPage();////
-	       //System.out.println(p.page);
-	       //System.out.println(p.page.get(0).htblColNameValue);
-	       //System.out.println(t.strTableName);
-	       //System.out.println(t.strClustringKeyColumn);
-	       //System.out.println(t.htblColNameType);
 	    } catch (IOException i) {
 	       i.printStackTrace();
-	       //return;
+
 	    } catch (ClassNotFoundException c) {
 	       System.out.println("class not found");
 	       c.printStackTrace();
-	       //return;
 	    }
 	}
 	
@@ -1342,23 +1164,13 @@ public class DBApp {
 	       RTree p = (RTree) in.readObject();
 	       in.close();
 	       fileIn.close();
-	       //return p;
 	       
 	       Rindex.add(p);
-	       //System.out.println("deserialized.");
-	       //p.printPage();////
-	       //System.out.println(p.page);
-	       //System.out.println(p.page.get(0).htblColNameValue);
-	       //System.out.println(t.strTableName);
-	       //System.out.println(t.strClustringKeyColumn);
-	       //System.out.println(t.htblColNameType);
 	    } catch (IOException i) {
 	       i.printStackTrace();
-	       //return;
 	    } catch (ClassNotFoundException c) {
 	       System.out.println("class not found");
 	       c.printStackTrace();
-	       //return;
 	    }
 	}
 	
@@ -1409,8 +1221,6 @@ public class DBApp {
 	
 	public static void updateSerialize(Object t, String fileName) {
 		try {
-//	         FileOutputStream fileOut =
-//	         new FileOutputStream("C:\\Users\\amirw\\eclipse-workspace\\DBApp\\data\\" + fileName);
 			 FileOutputStream fileOut =
 			 new FileOutputStream("data\\" + fileName);
 	         //new FileOutputStream(fileName + ".ser");
@@ -1432,7 +1242,6 @@ public class DBApp {
 	}
 	
 	public static Vector<String> getSerializedFiles() {
-//		File folder = new File("C:\\Users\\amirw\\eclipse-workspace\\DBApp\\data");
 		File folder2 = new File("data");
 		String ss = folder2.getAbsolutePath();
 		File folder = new File(ss);
@@ -1457,35 +1266,23 @@ public class DBApp {
 	}
 	
 	public static void deserialize(String fileName) {
-		//Table t = null;
 	    try {
 	       FileInputStream fileIn = new FileInputStream("data\\" + fileName);
 	       ObjectInputStream in = new ObjectInputStream(fileIn);
 	       Page p = (Page) in.readObject();
 	       in.close();
 	       fileIn.close();
-	       //return p;
 	       
 	       pages.add(p);
-	       //System.out.println("deserialized.");
-	       //p.printPage();////
-	       //System.out.println(p.page);
-	       //System.out.println(p.page.get(0).htblColNameValue);
-	       //System.out.println(t.strTableName);
-	       //System.out.println(t.strClustringKeyColumn);
-	       //System.out.println(t.htblColNameType);
 	    } catch (IOException i) {
 	       i.printStackTrace();
-	       //return;
 	    } catch (ClassNotFoundException c) {
 	       System.out.println("class not found");
 	       c.printStackTrace();
-	       //return;
 	    }
 	}
 	
 	public static void deleteFile(String fileName) {
-//		File f = new File("C:\\Users\\amirw\\eclipse-workspace\\DBApp\\data\\" + fileName);
 		File f = new File("data\\" + fileName);
 		f.delete();
 	}
@@ -1506,9 +1303,6 @@ public class DBApp {
 	}
 	
 	public static void sortMultiplePages(String tableName) {
-		//put all tuples of pages in one page and sort then fill pages
-		//and delete if page got empty
-		//and it should not be required to create
 		Vector<Page> tablePages = getTablePages(tableName);
 		Vector<Tuple> v = getAllTuplesOfTableSorted(tableName);
 		Vector<Hashtable<String, Object>> vvv = getSimpleTuples(v);
@@ -1522,35 +1316,6 @@ public class DBApp {
 		}
 	}
 	
-//	public static void sortMultiplePages(String tableName) {
-//		//put all tuples of pages in one page and sort then fill pages
-//		//and delete if page got empty
-//		//and it should not be required to create
-//		int j = 0;
-//		Vector<Page> tablePages = getTablePages(tableName);
-//		Vector<Tuple> v = getAllTuplesOfTableSorted(tableName);
-//		//int ss = v.size();	//i < ss forloop condition
-//		for(int i=0; !v.isEmpty(); i++) {
-//			Page p = tablePages.get(i);
-//			Vector<Tuple> vv = toInsertForSortInPage(p.n, v);
-//			p.insertForSort(vv);
-//			int s = vv.size();
-//			for(int k=0; k < s; k++) {
-//				v.remove(0);
-//				//v.remove(vv.get(k));
-//			}
-//		}
-//	}
-
-//for(int i=0; i < tablePages.size(); i++) {
-//	Page p = tablePages.get(i);
-//	Vector<Tuple> vv = new Vector<Tuple>();
-//	for(int k=0; k < p.n && !v.isEmpty(); k++) {
-//		vv.add(v.get(j));
-//		v.remove(j);
-//		j++;
-//	}
-//	p.insertForSort(vv);
 	
 	public static Vector<Tuple> toInsertForSortInPage(int n, Vector<Tuple> v){
 		Vector<Tuple> r = new Vector<Tuple>(); 
@@ -1569,7 +1334,7 @@ public class DBApp {
 			for(int j=0; j < p.page.size(); j++) {
 				Tuple t = p.page.get(j);
 				r.add(t);
-				//t.htblColNameValue = null;////////////////////
+				//t.htblColNameValue = null;
 			}
 		}
 		thePage.page = r;
@@ -1588,7 +1353,7 @@ public class DBApp {
 		return false;
 	}
 	
-/////////////////////////////////////////////////
+
 	public static Vector<Page> getTablePages(String tableName){
 		Vector<Page> r = new Vector<Page>();
 		for(int i=0; i < pages.size(); i++) {
@@ -1599,7 +1364,7 @@ public class DBApp {
 		}
 		return r;
 	}
-/////////////////////////////////////////////////
+
 	
 	public static boolean areAllPagesFull(Vector<Page> v) {
 		for(int i=0;i < v.size(); i++) {
@@ -1610,48 +1375,6 @@ public class DBApp {
 		return true;
 	}
 	
-	
-	
-//	public void insertIntoTable(String strTableName, Hashtable<String,Object> htblColNameValue) {
-//		//find table name findTable(String strTableName)
-//		Tuple e = new Tuple(strTableName, htblColNameValue);
-//		//check where to serialize the tuple, in which table
-//		//serialize(e);
-//		
-//		boolean flag = true;
-//		
-//		if(!pageFound(strTableName)) {					//or page full in one condition
-//			Page p = new Page(strTableName);
-//			p.addTuple(e);
-//			pages.add(p);
-//		}else {
-//			for(int i=0; i < pages.size(); i++) {
-//				Page p = pages.get(i);
-//				if((p.tableName).equals(strTableName)) {
-//					if(p.page.size() == p.n) {
-//						Page p1 = new Page(strTableName);
-//						p1.addTuple(e);
-//						pages.add(p1);
-//						break;
-//					}else {
-//						for(int j=0; j < p.page.size(); j++) {
-//							Tuple current = p.page.get(j);
-//							if(current.htblColNameValue == null) {
-//								current.htblColNameValue = e.htblColNameValue;
-//								current.strTableName = e.strTableName;
-//								flag = false;
-//								break;
-//							}
-//						}
-//						if(flag) {
-//							p.addTuple(e);
-//							break;
-//						}
-//					}
-//				}
-//			}
-//		}
-//	}
 		
 	public static int getYearOfDate(String date) {
 		//YYYY-MM-DD
@@ -1720,46 +1443,6 @@ public class DBApp {
 		return "";
 	}
 	
-	
-	
-//	public void deleteFromTable(String strTableName, Hashtable<String,Object> htblColNameValue) {
-//		ArrayList<String> conditionsKey = getConditionsKey(htblColNameValue);
-//		ArrayList<String> conditionsValue = getConditionsValue(htblColNameValue);
-//		for(int i=0; i < pages.size(); i++) {
-//			Page p = pages.get(i); 
-//			if(p.tableName.equals(strTableName)) {
-//				for(int j=0; j < p.page.size(); j++) {
-//					Tuple t = p.page.get(j);
-//					ArrayList<String> values = new ArrayList<String>();
-//					//////////////////////////////////////////////////
-//					for(int k=0; k < conditionsKey.size(); k++) {
-//						String key = conditionsKey.get(k);
-//						if(t.checkIfExists()) {
-//							String newValue = t.htblColNameValue.get(key)+"";
-//							values.add(newValue);
-//						}
-//					}
-//					//////////////////////////////////////////////////
-//					if(!values.isEmpty()) {
-//						if(equalValues(conditionsValue, values)) {
-//							//del
-//							//t = null
-//							t.htblColNameValue = null;
-//						}
-//					}
-//				}
-//			}
-//			if(checkEmptyPage(p)) {
-//				p.page = null;
-//				p = null;
-//			}
-//		}
-//	}
-	
-//	public void sortPage(String clstrKey, Page p) {
-//		Vector<Tuple> v = p.page;
-//		//v.sort(c);	insertionSort
-//	}
 	
 	public static boolean checkEmptyPage(Page p) {
 		if(p.page.isEmpty()) {
@@ -1834,25 +1517,24 @@ public class DBApp {
 		return "";
 	}
 	
-	public static boolean checkDataType(String tableName, Hashtable<String,Object> htblColNameValue) /*throws DBAppException*/{
+	public static boolean checkDataType(String tableName, Hashtable<String,Object> htblColNameValue) {
 		//get valid data types from metadata.csv
 		Hashtable<String,String> h = getTableDataTypes(tableName);
 		Enumeration<String> e = htblColNameValue.keys();
 		Enumeration<String> e2 = h.keys();
 		while(e.hasMoreElements()) {
-			String current = e.nextElement();	//returns gpa
+			String current = e.nextElement();	
 			Object currentValue = htblColNameValue.get(current);
 			//String dataType = e2.nextElement();
 			
-			String currentDataType = (currentValue.getClass()+"").substring(6);//////////
+			String currentDataType = (currentValue.getClass()+"").substring(6);
 			
 			if(currentDataType.equals("random_6.DBAppPolygon")) {
 				currentDataType = "java.awt.Polygon";
 			}
 			
-			String dataType = getDataType(current, h);///////////////////////////
+			String dataType = getDataType(current, h);
 			if(!currentDataType.equals(dataType)) {
-				//throw new DBAppException("Invalid data types.");
 				return false;
 			}
 		}
@@ -2003,252 +1685,7 @@ public class DBApp {
 	}
 	
 	public static void main(String[] args) {
-//		DBApp dbApp = new DBApp();
-//		
-//		String strTableName = "Student";
-//		
-//		Hashtable<String,String> htblColNameType = new Hashtable<String,String>();
-//		htblColNameType.put("id", "java.lang.Integer");
-//		htblColNameType.put("name", "java.lang.String"); 
-//		htblColNameType.put("gpa", "java.lang.Double");
-//		dbApp.createTable(strTableName, "id", htblColNameType);
-//		dbApp.createTable("CityShop2", "name", h);
-//		deserialize();
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		Hashtable<String,Object> htblColNameValue = new Hashtable<String,Object>(); 
-//		htblColNameValue.put("id", new Integer(2343432)); 
-//		htblColNameValue.put("name", new String("Ahmed Noor")); 
-//		htblColNameValue.put("gpa", new Double(0.95)); 
-//		dbApp.insertIntoTable(strTableName, htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-		
-		//serialize(pages.get(0));
-		//deserialize("SD.class");
-		//serializeAll();
-		//dbApp.init();
-		
-//		
-//		htblColNameValue.clear();
-//		htblColNameValue.put("id", new Integer(453455)); 
-//		htblColNameValue.put("name", new String("Ahmed Noor"));
-//		htblColNameValue.put("gpa", new Double(0.95)); 
-//		dbApp.insertIntoTable(strTableName, htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameValue.clear();
-//		htblColNameValue.put("id", new Integer(5674567)); 
-//		htblColNameValue.put("name", new String("Dalia Noor")); 
-//		htblColNameValue.put("gpa", new Double(1.25)); 
-//		dbApp.insertIntoTable(strTableName, htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameValue.clear( );
-//		htblColNameValue.put("id", new Integer(23498));
-//		htblColNameValue.put("name", new String("John Noor")); 
-//		htblColNameValue.put("gpa", new Double(1.5)); 
-//		dbApp.insertIntoTable(strTableName, htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameValue.clear( );
-//		htblColNameValue.put("id", new Integer(78452));
-//		htblColNameValue.put("name", new String("Zaky Noor")); 
-//		htblColNameValue.put("gpa", new Double(0.88));
-//		dbApp.insertIntoTable(strTableName, htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//	
-//		
-//		Hashtable<String,Object> h = new Hashtable<String,Object>(); 
-//		//h.put("gpa", new Double(1.5));
-//		h.put("gpa", new Double(0.95));
-//		h.put("id", new Integer(453455));
-//		dbApp.deleteFromTable(strTableName, h);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		
-//		
-//		
-//		h.clear();
-//		h.put("gpa", new Double(0.88));
-//		dbApp.deleteFromTable(strTableName, h);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//
-//		htblColNameValue.clear( );
-//		htblColNameValue.put("id", new Integer(1));
-//		htblColNameValue.put("name", new String("A")); 
-//		htblColNameValue.put("gpa", new Double(2.3));
-//		dbApp.insertIntoTable(strTableName, htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameValue.clear( );
-//		htblColNameValue.put("id", new Integer(1));
-//		htblColNameValue.put("name", new String("A")); 
-//		htblColNameValue.put("gpa", new Double(2.23));
-//		dbApp.updateTable(strTableName, "1", htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameValue.clear();
-//		htblColNameValue.put("id", new Integer(2));
-//		htblColNameValue.put("name", new String("B")); 
-//		htblColNameValue.put("gpa", new Double(3.0));
-//		dbApp.insertIntoTable(strTableName, htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameValue.clear();
-//		htblColNameValue.put("id", new Integer(3));
-//		htblColNameValue.put("name", new String("C")); 
-//		htblColNameValue.put("gpa", new Double(3));
-//		dbApp.insertIntoTable(strTableName, htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameValue.clear();
-//		htblColNameValue.put("id", new Integer(1));
-//		htblColNameValue.put("name", new String("changed")); 
-//		htblColNameValue.put("gpa", new Double(2.23));
-//		dbApp.updateTable(strTableName, "3", htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		h.clear();
-//		h.put("id", new Integer(1));
-//		dbApp.deleteFromTable(strTableName, h);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameValue.clear();
-//		htblColNameValue.put("id", new Integer(3));
-//		htblColNameValue.put("name", new String("C")); 
-//		htblColNameValue.put("gpa", new Double(3));
-//		dbApp.insertIntoTable(strTableName, htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameValue.clear();
-//		htblColNameValue.put("id", new Integer(3));
-//		htblColNameValue.put("name", new String("C")); 
-//		htblColNameValue.put("gpa", new Double(3));
-//		dbApp.insertIntoTable(strTableName, htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameType.clear();
-//		htblColNameType.put("available", "java.lang.Boolean");
-//		htblColNameType.put("name", "java.lang.String"); 
-//		htblColNameType.put("price", "java.lang.Double");
-//		dbApp.createTable("CityShop", "name", htblColNameType);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameValue.clear();
-//		htblColNameValue.put("available", new Boolean(false));
-//		htblColNameValue.put("name", new String("A")); 
-//		htblColNameValue.put("price", new Double(1.1));
-//		dbApp.insertIntoTable("CityShop", htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameValue.clear();
-//		htblColNameValue.put("available", new Integer(1));
-//		htblColNameValue.put("name", new String("A")); 
-//		htblColNameValue.put("price", new Double(1.1));
-//		dbApp.insertIntoTable("CityShop", htblColNameValue);
-//		
-//		//printPages();
-//		//System.out.println("-----------------------------------");
-////		
-//		htblColNameValue.clear();
-//		htblColNameValue.put("id", new Integer(1));
-//		htblColNameValue.put("name", new String("changed")); 
-//		htblColNameValue.put("gpa", new Integer(3));
-//		dbApp.updateTable(strTableName, "3", htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		h.clear();
-//		h.put("id", new Double(1));
-//		dbApp.deleteFromTable(strTableName, h);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameValue.clear();
-//		htblColNameValue.put("available", new Boolean(true));
-//		htblColNameValue.put("name", new String("B")); 
-//		htblColNameValue.put("price", new Double(1.1));
-//		dbApp.insertIntoTable("CityShop", htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameValue.clear();
-//		htblColNameValue.put("available", new Boolean(true));
-//		htblColNameValue.put("name", new String("d")); 
-//		htblColNameValue.put("price", new Double(1.1));
-//		dbApp.updateTable("CityShop", "A", htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameValue.clear();
-//		htblColNameValue.put("available", new Boolean(true));
-//		htblColNameValue.put("name", new String("A")); 
-//		htblColNameValue.put("price", new Double(1.1));
-//		dbApp.insertIntoTable("CityShop", htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		Hashtable<String,String> htblColNameType = new Hashtable<String,String>();
-//		htblColNameType.put("date", "java.lang.Date");
-//		htblColNameType.put("name", "java.lang.String"); 
-//		dbApp.createTable("TestDate", "date", htblColNameType);
-//		
-//		Hashtable<String,Object> htblColNameValue = new Hashtable<String,Object>();
-//		htblColNameValue.put("date", new Date());
-//		htblColNameValue.put("name", new String("A")); 
-//		dbApp.insertIntoTable("TestDate", htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
-//		
-//		htblColNameValue.clear();
-//		htblColNameValue.put("date", new Date());
-//		htblColNameValue.put("name", new String("Z")); 
-//		dbApp.insertIntoTable("TestDate", htblColNameValue);
-//		
-//		printPages();
-//		System.out.println("-----------------------------------");
+
 		
 	}
 	
